@@ -1,0 +1,25 @@
+<div class="body">
+<div class="container">
+<h2>Forgot your password?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="actions">
+    <form class="new_user" id="new_user" action="/users/password" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="dIxdm840cuD+WVky8gN6kGXKxXjvIo3MAJA0LsgFYyqMgSY0EmGio9r1cIT2JS/8maYUc/NUJPXu4oCgyyO0Qg==">
+
+
+  <div class="field">
+    <label for="user_email">Email</label><br>
+    <input autofocus="autofocus" type="email" value="" name="user[email]" id="user_email">
+  </div>
+<br>
+  <div class="actions">
+    <input type="submit" name="commit" value="Send me reset password instructions" class="btn btn-danger" data-disable-with="Send me reset password instructions">
+  </div>
+</form>
+  </div>
+<% end %>
+<br>
+<%= render "devise/shared/links" %>
+</div>
+</div>

@@ -1,0 +1,57 @@
+<div class="body">
+    <div class="container">
+    <%=  notice %>
+            <% if @book.errors.any? %>
+                <ul class="red">
+                  <h2><%= @book.errors.count %>errors prohibited this obj from being saved:</h2>
+                  <% @book.errors.full_messages.each do |message| %>
+                    <li><%= message%></li>
+                  <% end %>
+                </ul>
+            <% end %>
+
+            <div class="row">
+
+                <%= render 'shared/side', user: @user, book: @book %>
+
+                <div class="col-xs-9">
+                    <h2>Books</h2>
+                        <table class="table table-hover table-inverse">
+                            <thead>
+                                <th></th>
+                                <th>Title</th>
+                                <th>Opinion</th>
+                                <th colspan="3"></th>
+                            </thead>
+
+                            <% @books.each do |book| %>
+                            <tbody>
+                                <th>
+                                    <%= link_to user_path(book.user) do %>
+                                        <%= attachment_image_tag book.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no2_image.jpg"%>
+                                    <% end %>
+                                </th>
+                                <th><%= link_to book_path(book) do %><%= book.title %><% end %></th>
+                                <th><%= book.body %></th>
+                                <% if book.favorited_by?(current_user) %>
+                                    <th>
+                                        <%= link_to book_favorites_path(book.id), method: :delete do %>
+                                            <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+                                            <%= book.favorites.count %> いいね
+                                        <% end %>
+                                    </th>
+                                <% else %>
+                                    <th>
+                                        <%= link_to book_favorites_path(book), method: :post do %>
+                                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+                                            <%= book.favorites.count %> いいね
+                                        <% end %>
+                                    </th>
+                                <% end %>
+                            <% end %>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+</div>

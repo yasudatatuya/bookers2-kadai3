@@ -1,0 +1,32 @@
+<div class="body">
+    <div class="container">
+    <p class="gr-index"><%=  notice %></p>
+        <div class="row">
+
+            <%= render 'shared/side', user: @user, book: @book %>
+
+            <div class="col-xs-9">
+		        <h2>Book detail</h2>
+		        <table class="table">
+		            <tbody>
+                        <td><%= link_to user_path(@showbook.user) do %>
+                            <%= attachment_image_tag @showbook.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg"%>
+                            <br><%= @showbook.user.name %><% end %>
+                        </td>
+                        <td><%= link_to book_path(@showbook) do %><%= @showbook.title %><% end %></td>
+                        <td><%= @showbook.body %></td>
+
+                        <% if @showbook.user == current_user %>
+                            <td><%= link_to edit_book_path(@showbook) do %><span class="btn-sm btn-success edit_book">Edit</span><% end %></td>
+                            <td><%= link_to "Destroy", book_path(@showbook), method: :delete, class:"btn-sm btn-danger destroy_book", "data-confirm" => "本当に消しますか？" %></td>
+                        <% else %>
+                            <td></td>
+                            <td></td>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

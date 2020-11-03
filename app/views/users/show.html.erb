@@ -1,0 +1,29 @@
+<div class="body">
+    <div class="container">
+        <p class="gr-index"><%=  notice %></p>
+        <div class="row">
+
+            <%= render 'shared/side', user: @user, book: @book %>
+
+            <div class="col-xs-9">
+                <h2>Books</h2>
+                <table class="table table-hover table-inverse">
+                    <thead>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Opinion</th>
+                        <th colspan="3"></th>
+                    </thead>
+
+                    <% @books.each do |book| %>
+                    <tbody>
+                        <th><%= link_to user_path(book.user) do %><%= attachment_image_tag book.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no2_image.jpg"%><% end %></th>
+                        <th><%= link_to book_path(book) do %><%= book.title %><% end %></th>
+                        <th><%= book.body %></th>
+                    </tbody>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
