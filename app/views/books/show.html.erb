@@ -25,6 +25,21 @@
                         <% end %>
                     </tbody>
                 </table>
+
+                <table class="table">
+                    <% @showbook.book_comment_ids.each do |book_comment| %>
+                        <tbody>
+                            <td><%= attachment_image_tag book_comment.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg"%></td>
+                            <td><%= book_comment.comment %></td>
+                            <td>destroy</td>
+                        </tbody>
+                    <% end %>
+                </table>
+
+                <%= form_with(model:[@showbook, @book_comment], local: true) do |f| %>
+                    <%= f.text_area :comment, rows:'5', class: "form-control"%>
+                    <%= f.submit "送信", class: "pull-right" %>
+                <% end %>
             </div>
         </div>
     </div>
